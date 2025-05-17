@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
+from app import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from app.models import db, Reaction
+from app.models import Reaction
 from app.schemas.reaction import ReactionSchema
 
 reaction_bp = Blueprint('reaction_bp', __name__)

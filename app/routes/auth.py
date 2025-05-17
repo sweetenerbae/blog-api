@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
-from app.models import db, User, UserRole
+from app import db
+from app.models import User, UserRole
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token
 from datetime import datetime, timedelta
@@ -19,8 +20,7 @@ def register():
     user = User(
         username=data['username'],
         email=data['email'],
-        password_hash=generate_password_hash(data['password']),
-        role=UserRole(data['role']),
+        password_hash=generate_password_hash(data['password'], method='pbkdf2:sha256'),        role=UserRole(data['role']),
         is_active=False,
         created_at=datetime.utcnow()
     )

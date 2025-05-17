@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
+from app import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from app.models import db, Comment
+from app.models import Comment
 from app.schemas.comment import CommentSchema
 from app.utils.decorators import role_required
 
