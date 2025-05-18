@@ -16,14 +16,15 @@ def get_users():
     users = User.query.all()
     return users_schema.jsonify(users)
 
-@user_bp.route('/<int:user_id>/activate', methods=['PATCH'])
+@user_bp.route('/<int:user_id>/activate', methods=['POST'])
 @jwt_required()
 @role_required('admin')
 def activate_user(user_id):
+    print("➡️ reached activate_user()")
     user = User.query.get_or_404(user_id)
     user.is_active = True
     db.session.commit()
-    return jsonify({"msg": "User activated"})
+    return jsonify({"msg": f"User {user.username} activated"}), 200
 
 @user_bp.route('/<int:user_id>', methods=['DELETE'])
 @jwt_required()
@@ -33,3 +34,21 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
     return jsonify({"msg": "User deleted"})
+
+@user_bp.route('/debug/users', methods=['GET'])
+def debug_users():
+    users = User.query.all()
+    return jsonify([{
+        "id": u.id,
+        "username": u.username,
+        "email": u.email,
+        "role": u.role.value,
+        "is_active": u.is_active
+    } for u in users])
+
+@user_bp.route('/debug/me', methods=['GET'])
+@jwt_required()
+def get_me():
+    identity = get_jwt_identity()
+    print("🧠 Me:", identity)
+    return jsonify(identity)

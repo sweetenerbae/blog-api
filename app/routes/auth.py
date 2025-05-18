@@ -40,7 +40,8 @@ def login():
         return jsonify({"msg": "Account not activated"}), 403
 
     token = create_access_token(
-        identity={"id": user.id, "role": user.role.value},
+        identity=user.id,
+        additional_claims={"role": user.role.value},
         expires_delta=timedelta(hours=3)
     )
     return jsonify(access_token=token), 200

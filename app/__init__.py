@@ -1,9 +1,9 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 from flask_cors import CORS
-from config import Config  # ты можешь создать свой config.py
+from config import Config
 
 db = SQLAlchemy()
 jwt = JWTManager()
@@ -31,5 +31,13 @@ def create_app():
     app.register_blueprint(comment_bp, url_prefix='/api')
     app.register_blueprint(reaction_bp, url_prefix='/api')
     app.register_blueprint(user_bp, url_prefix='/api/users')
+
+    @app.errorhandler(422)
+    def handle_unprocessable_entity(err):
+        print("❗️422 triggered!")
+        return jsonify({
+            "msg": "Unprocessable entity",
+            "detail": str(err)
+        }), 422
 
     return app
