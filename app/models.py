@@ -1,4 +1,3 @@
-# app/models.py
 from app import db
 from datetime import datetime
 from sqlalchemy import Enum
@@ -15,7 +14,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)  # str, хешированный
+    password_hash = db.Column(db.String(256), nullable=False)  # str, хэшированный
     role = db.Column(Enum(UserRole), nullable=False)           # enum: teacher, student, admin
     is_active = db.Column(db.Boolean, default=False)           # False – активация через админа
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -37,6 +36,6 @@ class Comment(db.Model):
 
 class Reaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    emoji = db.Column(db.String(10), nullable=False)  # e.g., '👍', '❤️'
+    emoji = db.Column(db.String(10), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

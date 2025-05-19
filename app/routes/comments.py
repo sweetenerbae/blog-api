@@ -32,9 +32,9 @@ def create_comment(post_id):
     comment = Comment(text=data['content'], author_id=user_id, post_id=post_id)
     db.session.add(comment)
     db.session.commit()
-    return comment_schema.jsonify(comment), 201
+    return jsonify(comment_schema.dump(comment)), 201
 
 @comment_bp.route('/posts/<int:post_id>/comments', methods=['GET'])
 def get_comments(post_id):
     comments = Comment.query.filter_by(post_id=post_id).all()
-    return comments_schema.jsonify(comments), 200
+    return jsonify(comment_schema.dump(comments))

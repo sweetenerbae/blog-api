@@ -14,9 +14,9 @@ users_schema = UserSchema(many=True)
 @role_required('admin')
 def get_users():
     users = User.query.all()
-    return users_schema.jsonify(users)
+    return jsonify(user_schema.dump(users))
 
-@user_bp.route('/<int:user_id>/activate', methods=['POST'])
+@user_bp.route('/<int:user_id>/activate', methods=['PATCH'])
 @jwt_required()
 @role_required('admin')
 def activate_user(user_id):

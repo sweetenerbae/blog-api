@@ -14,7 +14,6 @@ def role_required(*roles):
 
             if user_role not in roles:
                 return jsonify({"msg": "Access denied: insufficient permissions"}), 403
-
             return fn(*args, **kwargs)
         return decorated_view
     return wrapper
