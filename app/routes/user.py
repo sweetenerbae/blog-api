@@ -9,7 +9,7 @@ user_bp = Blueprint('user_bp', __name__)
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
-@user_bp.route('', methods=['GET'])  # /api/users
+@user_bp.route('', methods=['GET'])
 @jwt_required()
 @role_required('admin')
 def get_users():

@@ -4,7 +4,7 @@ class Config:
     # Flask
     SECRET_KEY = os.getenv('SECRET_KEY', 'super-secret-key')
 
-    # SQLAlchemy (по умолчанию SQLite, можно переопределить в .env)
+    # SQLAlchemy
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///db.sqlite3')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 

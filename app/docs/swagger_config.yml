@@ -1,0 +1,70 @@
+swagger: '2.0'
+info:
+  title: Teachers Blog API
+  version: 1.0.0
+  description: |
+    Блог преподавателей факультета с REST API на Flask
+    ### Особенности:
+    - JWT-авторизация
+    - Ролевая модель (admin/teacher/student)
+host: 127.0.0.1:5000
+basePath: /
+schemes:
+  - http
+securityDefinitions:
+  BearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Введите JWT токен в формате "Bearer <token>"
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      username:
+        type: string
+        example: "ivanov"
+      email:
+        type: string
+        example: "ivanov@example.com"
+      role:
+        type: string
+        enum: [ "teacher", "student", "admin" ]
+        example: "student"
+      is_active:
+        type: boolean
+        example: true
+      created_at:
+        type: string
+        format: date-time
+        example: "2023-01-01T12:00:00Z"
+
+  Post:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      title:
+        type: string
+        example: "Мой первый пост"
+      content:
+        type: string
+        example: "Текст поста..."
+      author_id:
+        type: integer
+        example: 1
+      created_at:
+        type: string
+        format: date-time
+        example: "2023-01-01T12:00:00Z"
+
+  Error:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Ошибка авторизации"

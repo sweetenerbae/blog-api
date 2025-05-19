@@ -1,3 +1,4 @@
+from flasgger import Swagger, swag_from
 from flask import Blueprint, request, jsonify
 from app import db
 from app.models import User, UserRole
@@ -8,6 +9,7 @@ from datetime import datetime, timedelta
 auth_bp = Blueprint('auth_bp', __name__)
 
 @auth_bp.route('/register', methods=['POST'])
+@swag_from('docs/auth_docs.yml', endpoint='auth.register')
 def register():
     data = request.get_json()
 
@@ -30,6 +32,7 @@ def register():
     return jsonify({"msg": "User registered. Wait for admin activation."}), 201
 
 @auth_bp.route('/login', methods=['POST'])
+@swag_from('docs/auth_docs.yml', endpoint='auth.login')
 def login():
     data = request.get_json()
     user = User.query.filter_by(email=data['email']).first()
@@ -41,11 +44,8 @@ def login():
         return jsonify({"msg": "Account not activated"}), 403
 
     token = create_access_token(
-        identity={
-            "id": str(user.id),
-            "username": user.username,
-            "role": user.role.value
-        },
+        identity=str(user.id),
+        additional_claims={"role": user.role.value},
         expires_delta=timedelta(hours=3)
     )
     return jsonify(access_token=token), 200

@@ -1,0 +1,74 @@
+register:
+  post:
+    tags:
+      - Authentication
+    summary: Регистрация нового пользователя
+    description: |
+      Создает нового пользователя с ролью teacher/student.
+      Требует активации администратором.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '/docs/swagger_config.yml#/components/schemas/UserRegister'
+    responses:
+      201:
+        description: Пользователь успешно зарегистрирован
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  example: "User registered. Wait for admin activation."
+      400:
+        description: Неверные данные
+        content:
+          application/json:
+            schema:
+              $ref: '/docs/swagger_config.yml#/components/schemas/ErrorResponse'
+            examples:
+              invalid_role:
+                value:
+                  msg: "Role must be teacher or student"
+              user_exists:
+                value:
+                  msg: "Username or email already exists"
+
+login:
+  post:
+    tags:
+      - Authentication
+    summary: Аутентификация пользователя
+    description: Возвращает JWT токен для авторизованных пользователей
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '/docs/swagger_config.yml#/components/schemas/LoginRequest'
+    responses:
+      200:
+        description: Успешный вход
+        content:
+          application/json:
+            schema:
+              $ref: '/docs/swagger_config.yml#/components/schemas/TokenResponse'
+      401:
+        description: Неверные учетные данные
+        content:
+          application/json:
+            schema:
+              $ref: '/docs/swagger_config.yml#/components/schemas/ErrorResponse'
+            example:
+              msg: "Invalid credentials"
+      403:
+        description: Аккаунт не активирован
+        content:
+          application/json:
+            schema:
+              $ref: '/docs/swagger_config.yml#/components/schemas/ErrorResponse'
+            example:
+              msg: "Account not activated"

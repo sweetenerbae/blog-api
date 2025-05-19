@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5fa8a8fd-3ad4-4415-b3ce-bb23930f9605" name="Changes" comment="добавила create_admin.py скрипт, добавила маршруты для дебага и обработчик ошибки 422 в __init__.py">
+    <list default="true" id="5fa8a8fd-3ad4-4415-b3ce-bb23930f9605" name="Changes" comment="some changes">
+      <change afterPath="$PROJECT_DIR$/app/docs/auth_docs.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/docs/swagger_config.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/docs/user.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/posts.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/posts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,6 +61,12 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app" />
+      <recent name="$PROJECT_DIR$/docs" />
+    </key>
+  </component>
   <component name="RunManager" selected="Python.run">
     <configuration name="create_admin" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="teachers-blog" />
@@ -151,13 +159,22 @@
       <option name="project" value="LOCAL" />
       <updated>1747590082855</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="some changes">
+      <option name="closed" value="true" />
+      <created>1747669522588</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1747669522588</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="fix werkzeug import and fix ForeignKey from user.id to users.id" />
     <MESSAGE value="добавила create_admin.py скрипт, добавила маршруты для дебага и обработчик ошибки 422 в __init__.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="добавила create_admin.py скрипт, добавила маршруты для дебага и обработчик ошибки 422 в __init__.py" />
+    <MESSAGE value="some changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="some changes" />
   </component>
 </project>
