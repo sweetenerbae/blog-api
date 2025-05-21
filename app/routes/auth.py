@@ -5,11 +5,12 @@ from app.models import User, UserRole
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token
 from datetime import datetime, timedelta
+import os
 
 auth_bp = Blueprint('auth_bp', __name__)
 
 @auth_bp.route('/register', methods=['POST'])
-@swag_from('docs/auth_docs.yml', endpoint='auth.register')
+@swag_from(os.path.join('docs', 'auth_docs.yml'), endpoint='/auth/register', methods=['POST'])
 def register():
     data = request.get_json()
 
@@ -32,7 +33,7 @@ def register():
     return jsonify({"msg": "User registered. Wait for admin activation."}), 201
 
 @auth_bp.route('/login', methods=['POST'])
-@swag_from('docs/auth_docs.yml', endpoint='auth.login')
+@swag_from(os.path.join('docs', 'auth_docs.yml'), endpoint='/auth/register', methods=['POST'])
 def login():
     data = request.get_json()
     user = User.query.filter_by(email=data['email']).first()

@@ -1,74 +1,56 @@
-register:
-  post:
+paths:
+  /auth/register:
     tags:
-      - Authentication
-    summary: Регистрация нового пользователя
-    description: |
-      Создает нового пользователя с ролью teacher/student.
-      Требует активации администратором.
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '/docs/swagger_config.yml#/components/schemas/UserRegister'
+      - Аутентификация
+    summary: Регистрация пользователя
+    description: Регистрирует нового пользователя с ролью `teacher` или `student`.
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: "#/definitions/RegisterRequest"
     responses:
       201:
-        description: Пользователь успешно зарегистрирован
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                msg:
-                  type: string
-                  example: "User registered. Wait for admin activation."
+        description: Успешная регистрация
+        schema:
+          type: object
+          properties:
+            msg:
+              type: string
+              example: User registered. Wait for admin activation.
       400:
-        description: Неверные данные
-        content:
-          application/json:
-            schema:
-              $ref: '/docs/swagger_config.yml#/components/schemas/ErrorResponse'
-            examples:
-              invalid_role:
-                value:
-                  msg: "Role must be teacher or student"
-              user_exists:
-                value:
-                  msg: "Username or email already exists"
+        description: Ошибка — неправильная роль или пользователь уже существует
+        schema:
+          $ref: "#/definitions/ErrorResponse"
 
-login:
-  post:
+  /auth/login:
     tags:
-      - Authentication
-    summary: Аутентификация пользователя
-    description: Возвращает JWT токен для авторизованных пользователей
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '/docs/swagger_config.yml#/components/schemas/LoginRequest'
+      - Аутентификация
+    summary: Вход в систему
+    description: Получение JWT токена по email и паролю.
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: "#/definitions/AuthRequest"
     responses:
       200:
         description: Успешный вход
-        content:
-          application/json:
-            schema:
-              $ref: '/docs/swagger_config.yml#/components/schemas/TokenResponse'
+        schema:
+          $ref: "#/definitions/AuthResponse"
       401:
         description: Неверные учетные данные
-        content:
+        schema:
+          $ref: '#/definitions/ErrorResponse'
+        examples:
           application/json:
-            schema:
-              $ref: '/docs/swagger_config.yml#/components/schemas/ErrorResponse'
-            example:
-              msg: "Invalid credentials"
+            msg: Invalid credentials
       403:
-        description: Аккаунт не активирован
-        content:
+        description: Учетная запись не активирована
+        schema:
+          $ref: '#/definitions/ErrorResponse'
+        examples:
           application/json:
-            schema:
-              $ref: '/docs/swagger_config.yml#/components/schemas/ErrorResponse'
-            example:
-              msg: "Account not activated"
+            msg:  Account not activated

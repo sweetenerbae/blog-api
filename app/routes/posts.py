@@ -4,6 +4,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.models import Post
 from app.schemas.post import PostSchema
 from app.utils.decorators import role_required
+from flasgger import Swagger, swag_from
 
 post_bp = Blueprint('post_bp', __name__)
 post_schema = PostSchema()
@@ -12,6 +13,7 @@ posts_schema = PostSchema(many=True)
 @post_bp.route('/posts', methods=['POST'])
 @jwt_required()
 @role_required('teacher')
+@swag_from('post_docs.yml', endpoint='post.create_post')
 def create_post():
     data = request.get_json()
     user_id = get_jwt_identity()['id']
@@ -21,17 +23,20 @@ def create_post():
     return post_schema.jsonify(post), 201
 
 @post_bp.route('/posts', methods=['GET'])
+@swag_from('post_docs.yml', endpoint='post.get_all_posts')
 def get_all_posts():
     posts = Post.query.order_by(Post.created_at.desc()).all()
     return posts_schema.jsonify(posts), 200
 
 @post_bp.route('/posts/<int:post_id>', methods=['GET'])
+@swag_from('post_docs.yml', endpoint='post.get_post_by_id')
 def get_post(post_id):
     post = Post.query.get_or_404(post_id)
     return post_schema.jsonify(post)
 
 @post_bp.route('/posts/<int:post_id>', methods=['PUT'])
 @jwt_required()
+@swag_from('post_docs.yml', endpoint='post.update_post')
 def update_post(post_id):
     post = Post.query.get_or_404(post_id)
     user = get_jwt_identity()
@@ -45,6 +50,7 @@ def update_post(post_id):
 
 @post_bp.route('/posts/<int:post_id>', methods=['DELETE'])
 @jwt_required()
+@swag_from('post_docs.yml', endpoint='post.delete_post')
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
     user = get_jwt_identity()

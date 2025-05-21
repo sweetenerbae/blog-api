@@ -4,6 +4,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.models import Comment
 from app.schemas.comment import CommentSchema
 from app.utils.decorators import role_required
+from flasgger import Swagger, swag_from
 
 comment_bp = Blueprint('comment_bp', __name__)
 comment_schema = CommentSchema()

@@ -1,3 +1,6 @@
+from app.docs.swagger_config import swagger_config
+import os
+import yaml
 from flasgger import Swagger
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -6,25 +9,12 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 from config import Config
 
-
 db = SQLAlchemy()
 jwt = JWTManager()
 migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SWAGGER'] = {
-        'title': 'User Auth API',
-        'uiversion': 3,
-        'specs': [{
-            'endpoint': 'apispec',
-            'route': '/apispec.json',
-            'rule_filter': lambda rule: True,
-            'model_filter': lambda tag: True,
-        }],
-        'static_url_path': '/flasgger_static',
-        'specs_route': '/docs/'
-    }
     app.config.from_object(Config)
 
     # Расширения
@@ -32,7 +22,7 @@ def create_app():
     jwt.init_app(app)
     migrate.init_app(app, db)
     CORS(app)
-    Swagger(app, template_file='docs/swagger_config.yml')
+    api = Api(app, doc='/docs')  # Swagger доступен по /docs
 
     # Регистрация blueprints
     from app.routes.auth import auth_bp

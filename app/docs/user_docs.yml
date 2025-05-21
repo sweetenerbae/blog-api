@@ -1,0 +1,96 @@
+user.get_users:
+  tags:
+    - Пользователи
+  summary: Список всех пользователей
+  description: Доступ только для администратора. Возвращает список всех зарегистрированных пользователей.
+  security:
+    - Bearer: []
+  responses:
+    200:
+      description: Успешный ответ — список пользователей
+      schema:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            username:
+              type: string
+              example: johndoe
+            email:
+              type: string
+              example: johndoe@example.com
+            role:
+              type: string
+              example: student
+            is_active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+              example: 2025-05-21T12:34:56Z
+    401:
+      description: Не авторизован (нет токена или просрочен)
+    403:
+      description: Доступ запрещён (недостаточно прав)
+
+user.activate_user:
+  tags:
+    - Пользователи
+  summary: Активация пользователя
+  description: Доступ только для администратора. Устанавливает `is_active = true` у пользователя по ID.
+  parameters:
+    - name: user_id
+      in: path
+      required: true
+      type: integer
+      description: ID пользователя, которого нужно активировать
+  security:
+    - Bearer: []
+  responses:
+    200:
+      description: Пользователь успешно активирован
+      schema:
+        type: object
+        properties:
+          msg:
+            type: string
+            example: User johndoe activated
+    401:
+      description: Неавторизован (нет токена или просрочен)
+    403:
+      description: Доступ запрещён (недостаточно прав)
+    404:
+      description: Пользователь не найден
+
+user.delete_user:
+  tags:
+    - Пользователи
+  summary: Удаление пользователя
+  description: Доступ только для администратора. Удаляет пользователя по ID.
+  parameters:
+    - name: user_id
+      in: path
+      required: true
+      type: integer
+      description: ID пользователя, которого нужно удалить
+  security:
+    - Bearer: []
+  responses:
+    200:
+      description: Пользователь успешно удалён
+      schema:
+        type: object
+        properties:
+          msg:
+            type: string
+            example: User deleted
+    401:
+      description: Неавторизован (нет токена или просрочен)
+    403:
+      description: Доступ запрещён (недостаточно прав)
+    404:
+      description: Пользователь не найден

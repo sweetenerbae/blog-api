@@ -3,6 +3,7 @@ from app import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.models import Reaction
 from app.schemas.reaction import ReactionSchema
+from flasgger import Swagger, swag_from
 
 reaction_bp = Blueprint('reaction_bp', __name__)
 reaction_schema = ReactionSchema()
