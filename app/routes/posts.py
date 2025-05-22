@@ -1,61 +1,73 @@
-from flask import Blueprint, request, jsonify
-from app import db
+from flask_restx import Namespace, Resource, fields
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from app import db
 from app.models import Post
 from app.schemas.post import PostSchema
-from app.utils.decorators import role_required
-from flasgger import Swagger, swag_from
 
-post_bp = Blueprint('post_bp', __name__)
+post_ns = Namespace('posts', description='Post related operations')
+
+post_model = post_ns.model('Post', {
+    'title': fields.String(required=True, description='Post title'),
+    'content': fields.String(required=True, description='Post content'),
+})
+
 post_schema = PostSchema()
 posts_schema = PostSchema(many=True)
 
-@post_bp.route('/posts', methods=['POST'])
-@jwt_required()
-@role_required('teacher')
-@swag_from('post_docs.yml', endpoint='post.create_post')
-def create_post():
-    data = request.get_json()
-    user_id = get_jwt_identity()['id']
-    post = Post(title=data['title'], content=data['content'], author_id=user_id)
-    db.session.add(post)
-    db.session.commit()
-    return post_schema.jsonify(post), 201
+@post_ns.route('')
+class PostList(Resource):
+    @post_ns.expect(post_model)
+    @post_ns.response(201, 'Post created')
+    @jwt_required()
+    def post(self):
+        """Create a new post"""
+        data = post_ns.payload
+        user_id = get_jwt_identity()['id']
+        post = Post(title=data['title'], content=data['content'], author_id=user_id)
+        db.session.add(post)
+        db.session.commit()
+        return post_schema.dump(post), 201
 
-@post_bp.route('/posts', methods=['GET'])
-@swag_from('post_docs.yml', endpoint='post.get_all_posts')
-def get_all_posts():
-    posts = Post.query.order_by(Post.created_at.desc()).all()
-    return posts_schema.jsonify(posts), 200
+    @post_ns.response(200, 'Success')
+    def get(self):
+        """Get all posts"""
+        posts = Post.query.order_by(Post.created_at.desc()).all()
+        return posts_schema.dump(posts), 200
 
-@post_bp.route('/posts/<int:post_id>', methods=['GET'])
-@swag_from('post_docs.yml', endpoint='post.get_post_by_id')
-def get_post(post_id):
-    post = Post.query.get_or_404(post_id)
-    return post_schema.jsonify(post)
+@post_ns.route('/<int:post_id>')
+class PostResource(Resource):
+    @post_ns.response(200, 'Success')
+    @post_ns.response(404, 'Post not found')
+    def get(self, post_id):
+        """Get post by ID"""
+        post = Post.query.get_or_404(post_id)
+        return post_schema.dump(post)
 
-@post_bp.route('/posts/<int:post_id>', methods=['PUT'])
-@jwt_required()
-@swag_from('post_docs.yml', endpoint='post.update_post')
-def update_post(post_id):
-    post = Post.query.get_or_404(post_id)
-    user = get_jwt_identity()
-    if user['id'] != post.author_id and user['role'] != 'admin':
-        return jsonify({"msg": "Forbidden"}), 403
-    data = request.get_json()
-    post.title = data.get('title', post.title)
-    post.content = data.get('content', post.content)
-    db.session.commit()
-    return post_schema.jsonify(post)
+    @post_ns.expect(post_model)
+    @post_ns.response(200, 'Post updated')
+    @post_ns.response(403, 'Forbidden')
+    @jwt_required()
+    def put(self, post_id):
+        """Update post"""
+        post = Post.query.get_or_404(post_id)
+        user = get_jwt_identity()
+        if user['id'] != post.author_id and user['role'] != 'admin':
+            return {'msg': 'Forbidden'}, 403
+        data = post_ns.payload
+        post.title = data.get('title', post.title)
+        post.content = data.get('content', post.content)
+        db.session.commit()
+        return post_schema.dump(post)
 
-@post_bp.route('/posts/<int:post_id>', methods=['DELETE'])
-@jwt_required()
-@swag_from('post_docs.yml', endpoint='post.delete_post')
-def delete_post(post_id):
-    post = Post.query.get_or_404(post_id)
-    user = get_jwt_identity()
-    if user['id'] != post.author_id and user['role'] != 'admin':
-        return jsonify({"msg": "Forbidden"}), 403
-    db.session.delete(post)
-    db.session.commit()
-    return jsonify({"msg": "Пост удален"})
+    @post_ns.response(200, 'Post deleted')
+    @post_ns.response(403, 'Forbidden')
+    @jwt_required()
+    def delete(self, post_id):
+        """Delete post"""
+        post = Post.query.get_or_404(post_id)
+        user = get_jwt_identity()
+        if user['id'] != post.author_id and user['role'] != 'admin':
+            return {'msg': 'Forbidden'}, 403
+        db.session.delete(post)
+        db.session.commit()
+        return {'msg': 'Пост удален'}, 200

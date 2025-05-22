@@ -4,21 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5fa8a8fd-3ad4-4415-b3ce-bb23930f9605" name="Changes" comment="добавила swagger">
-      <change afterPath="$PROJECT_DIR$/app/docs/swagger_config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/docs/swagger_template.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/docs/user_docs.yml" afterDir="false" />
+    <list default="true" id="5fa8a8fd-3ad4-4415-b3ce-bb23930f9605" name="Changes" comment="некоторые изменения по swagger">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/docs/auth_docs.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/docs/auth_docs.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/docs/swagger_config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/docs/user.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/docs/post_docs.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes/comments.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/comments.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes/posts.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/posts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes/reactions.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/reactions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/post.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/post.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +174,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747684396028</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="некоторые изменения по swagger">
+      <option name="closed" value="true" />
+      <created>1747860081648</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1747860081648</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -189,6 +191,7 @@
     <MESSAGE value="добавила create_admin.py скрипт, добавила маршруты для дебага и обработчик ошибки 422 в __init__.py" />
     <MESSAGE value="some changes" />
     <MESSAGE value="добавила swagger" />
-    <option name="LAST_COMMIT_MESSAGE" value="добавила swagger" />
+    <MESSAGE value="некоторые изменения по swagger" />
+    <option name="LAST_COMMIT_MESSAGE" value="некоторые изменения по swagger" />
   </component>
 </project>
