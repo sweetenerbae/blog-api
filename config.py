@@ -11,3 +11,9 @@ class Config:
     # JWT
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'super-jwt-secret')
     JWT_ACCESS_TOKEN_EXPIRES = 10800
+
+class TestingConfig:
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    JWT_SECRET_KEY = "testing-secret"

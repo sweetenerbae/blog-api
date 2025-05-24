@@ -15,8 +15,8 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(256), nullable=False)  # str, хэшированный
-    role = db.Column(Enum(UserRole), nullable=False)           # enum: teacher, student, admin
-    is_active = db.Column(db.Boolean, default=False)           # False – активация через админа
+    role = db.Column(Enum(UserRole), nullable=False)
+    is_active = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 class Post(db.Model):

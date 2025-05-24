@@ -4,29 +4,31 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 from flask_cors import CORS
-from config import Config
+from config import Config, TestingConfig
 
-# Инициализация расширений
+# Расширения
 db = SQLAlchemy()
 jwt = JWTManager()
 migrate = Migrate()
 
-def create_app():
+def create_app(config_name=None):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    if config_name == 'testing':
+        app.config.from_object(TestingConfig)
+    else:
+        app.config.from_object(Config)
 
-    # Инициализация расширений
+    # Расширения
     db.init_app(app)
     jwt.init_app(app)
     migrate.init_app(app, db)
     CORS(app)
 
-    # Инициализация API-инстанса (вынесен для использования в models/schemas)
     api = Api(
         title="teachers-blog API",
         version="1.0",
         description="Блог преподавателей факультета с REST API на Flask",
-        doc="/docs"  # Swagger UI доступен по /docs
+        doc="/docs"
     )
 
     from app.routes.auth import auth_ns
@@ -35,7 +37,6 @@ def create_app():
     from app.routes.comments import comment_ns
     from app.routes.reactions import reaction_ns
 
-    # Регистрация namespace'ов через API
     api.init_app(app)
     api.add_namespace(auth_ns, path="/api/auth")
     api.add_namespace(user_ns, path="/api/users")

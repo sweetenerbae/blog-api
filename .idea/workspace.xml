@@ -4,15 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5fa8a8fd-3ad4-4415-b3ce-bb23930f9605" name="Changes" comment="некоторые изменения по swagger">
+    <list default="true" id="5fa8a8fd-3ad4-4415-b3ce-bb23930f9605" name="Changes" comment="Рефакторинг. Сменила структуру на flask-restx">
+      <change afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_auth.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_posts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/comments.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/comments.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/posts.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/posts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/reactions.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/reactions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/post.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/post.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/docs/auth_docs.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/docs/post_docs.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/docs/swagger_config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/docs/swagger_template.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/docs/user_docs.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +46,9 @@
     &quot;accountId&quot;: &quot;169229ab-21c2-4a4e-870a-5157c35e92eb&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/.venv/lib/python3.9/site-packages/flask_jwt_extended/utils.py" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -182,7 +190,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747860081648</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Рефакторинг. Сменила структуру на flask-restx">
+      <option name="closed" value="true" />
+      <created>1747940844880</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1747940844880</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -192,6 +208,7 @@
     <MESSAGE value="some changes" />
     <MESSAGE value="добавила swagger" />
     <MESSAGE value="некоторые изменения по swagger" />
-    <option name="LAST_COMMIT_MESSAGE" value="некоторые изменения по swagger" />
+    <MESSAGE value="Рефакторинг. Сменила структуру на flask-restx" />
+    <option name="LAST_COMMIT_MESSAGE" value="Рефакторинг. Сменила структуру на flask-restx" />
   </component>
 </project>
