@@ -38,7 +38,9 @@ class PostCommentListResource(Resource):
         """Создание комментария к посту"""
         data = request.get_json()
         user_id = get_jwt_identity()['id']
-        comment = Comment(text=data['content'], author_id=user_id, post_id=post_id)
+        comment = Comment(text=data['content'],
+                          author_id=user_id,
+                          post_id=post_id)
         db.session.add(comment)
         db.session.commit()
         return comment_schema.dump(comment), 201

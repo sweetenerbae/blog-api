@@ -1,3 +1,5 @@
+from email.policy import default
+
 from app import db
 from datetime import datetime
 from sqlalchemy import Enum
@@ -26,6 +28,7 @@ class Post(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
+    is_published = db.Column(db.Boolean, default=True)
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)

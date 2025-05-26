@@ -1,4 +1,3 @@
-from flask import request
 from flask_restx import Namespace, Resource, fields
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app import db
@@ -22,7 +21,6 @@ class UserList(Resource):
     @user_ns.marshal_list_with(user_model)
     @user_ns.response(200, 'Список пользователей')
     def get(self):
-        """Получить список всех пользователей (только для admin)"""
         users = User.query.all()
         return users
 
@@ -34,7 +32,6 @@ class ActivateUser(Resource):
     @user_ns.response(200, 'Пользователь активирован')
     @user_ns.response(404, 'Пользователь не найден')
     def patch(self, user_id):
-        """Активировать пользователя (только для admin)"""
         user = User.query.get_or_404(user_id)
         user.is_active = True
         db.session.commit()
@@ -48,7 +45,6 @@ class DeleteUser(Resource):
     @user_ns.response(200, 'Пользователь удалён')
     @user_ns.response(404, 'Пользователь не найден')
     def delete(self, user_id):
-        """Удалить пользователя (только для admin)"""
         user = User.query.get_or_404(user_id)
         db.session.delete(user)
         db.session.commit()
@@ -58,7 +54,6 @@ class DeleteUser(Resource):
 @user_ns.route('/debug/users')
 class DebugUserList(Resource):
     def get(self):
-        """DEBUG: список всех пользователей"""
         users = User.query.all()
         return [{
             "id": u.id,
@@ -73,6 +68,5 @@ class DebugUserList(Resource):
 class GetMe(Resource):
     @jwt_required()
     def get(self):
-        """DEBUG: получить текущего пользователя"""
         identity = get_jwt_identity()
         return {"user_id": identity}

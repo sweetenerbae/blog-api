@@ -36,6 +36,7 @@ def create_app(config_name=None):
     from app.routes.posts import post_ns
     from app.routes.comments import comment_ns
     from app.routes.reactions import reaction_ns
+    from app.routes.feed import feed_ns
 
     api.init_app(app)
     api.add_namespace(auth_ns, path="/api/auth")
@@ -43,5 +44,6 @@ def create_app(config_name=None):
     api.add_namespace(comment_ns, path="/api/comments")
     api.add_namespace(reaction_ns, path="/api/reactions")
     api.add_namespace(post_ns, path="/api/posts")
+    api.add_namespace(feed_ns, path="/api/feed")
 
     return app
