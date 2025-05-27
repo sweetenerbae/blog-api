@@ -7,12 +7,10 @@ from app.schemas.reaction import ReactionSchema
 
 reaction_ns = Namespace('reactions', description='Реакции на посты')
 
-# Swagger модель
 reaction_model = reaction_ns.model('Reaction', {
     'emoji': fields.String(required=True, description='Эмодзи реакции')
 })
 
-# Marshmallow схема
 reaction_schema = ReactionSchema()
 reactions_schema = ReactionSchema(many=True)
 
@@ -22,7 +20,6 @@ class ReactionListResource(Resource):
     @jwt_required()
     @reaction_ns.expect(reaction_model)
     def post(self, post_id):
-        """Добавить реакцию к посту"""
         data = request.get_json()
         user_id = get_jwt_identity()['id']
 
@@ -40,7 +37,6 @@ class ReactionListResource(Resource):
 class ReactionResource(Resource):
     @jwt_required()
     def delete(self, reaction_id):
-        """Удалить реакцию"""
         reaction = Reaction.query.get_or_404(reaction_id)
         user = get_jwt_identity()
 

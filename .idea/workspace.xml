@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5fa8a8fd-3ad4-4415-b3ce-bb23930f9605" name="Changes" comment="Добавила тесты">
-      <change afterPath="$PROJECT_DIR$/app/routes/feed.py" afterDir="false" />
+    <list default="true" id="5fa8a8fd-3ad4-4415-b3ce-bb23930f9605" name="Changes" comment="Некоторые изменения">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes/comments.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/comments.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/posts.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/posts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/post.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/post.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_auth.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/reactions.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/reactions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +197,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748113223461</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Некоторые изменения">
+      <option name="closed" value="true" />
+      <created>1748291018628</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1748291018628</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -214,6 +217,7 @@
     <MESSAGE value="некоторые изменения по swagger" />
     <MESSAGE value="Рефакторинг. Сменила структуру на flask-restx" />
     <MESSAGE value="Добавила тесты" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавила тесты" />
+    <MESSAGE value="Некоторые изменения" />
+    <option name="LAST_COMMIT_MESSAGE" value="Некоторые изменения" />
   </component>
 </project>
